@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LumaRise | AI Manifestation Journal</title>
+  <meta name="description" content="LumaRise is an AI-powered manifestation, affirmation, and journaling app for reflection, clarity, and becoming." />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #07030f;
+      color: #fff8f1;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(123, 63, 160, 0.45), transparent 35%),
+        radial-gradient(circle at 50% 100%, rgba(174, 72, 201, 0.35), transparent 35%),
+        linear-gradient(180deg, #05020b 0%, #120720 40%, #2a1050 75%, #07030f 100%);
+      position: relative;
+      padding: 28px 22px 60px;
+      overflow: hidden;
+    }
+
+    .stars span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: #fff8f1;
+      border-radius: 50%;
+      opacity: 0.75;
+    }
+
+    .stars span:nth-child(1) { top: 7%; left: 12%; }
+    .stars span:nth-child(2) { top: 14%; left: 80%; }
+    .stars span:nth-child(3) { top: 25%; left: 18%; }
+    .stars span:nth-child(4) { top: 34%; left: 88%; }
+    .stars span:nth-child(5) { top: 62%; left: 10%; }
+    .stars span:nth-child(6) { top: 78%; left: 76%; }
+    .stars span:nth-child(7) { top: 86%; left: 20%; }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff8f1;
+    }
+
+    .nav a {
+      color: #d8b4d0;
+      text-decoration: none;
+      margin-left: 26px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 980px;
+      margin: 90px auto 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .moon-wrap {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(247, 223, 166, 0.18);
+      box-shadow: 0 0 80px rgba(247, 223, 166, 0.28);
+    }
+
+    .moon {
+      font-size: 86px;
+      color: #f7dfa6;
+      text-shadow: 0 0 30px rgba(247, 223, 166, 0.7);
+      transform: translateY(-4px);
+    }
+
+    .eyebrow {
+      color: #cfa7ef;
+      font-size: 13px;
+      letter-spacing: 4px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(58px, 11vw, 118px);
+      line-height: 0.9;
+      letter-spacing: -4px;
+      color: #fff8f1;
+      margin-bottom: 22px;
+      font-weight: 900;
+    }
+
+    .tagline {
+      font-size: clamp(22px, 3vw, 34px);
+      color: #d8b4f0;
+      line-height: 1.35;
+      margin-bottom: 34px;
+    }
+
+    .description {
+      max-width: 680px;
+      margin: 0 auto 42px;
+      color: #eadcf2;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .btn {
+      padding: 17px 28px;
+      border-radius: 999px;
+      font-weight: 900;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffe8a8, #f3c77c);
+      color: #160723;
+      box-shadow: 0 14px 35px rgba(247, 223, 166, 0.25);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #fff8f1;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .features {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 30px;
+      padding: 30px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.24);
+    }
+
+    .card .icon {
+      font-size: 34px;
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #fff8f1;
+    }
+
+    .card p {
+      color: #e8d5f0;
+      line-height: 1.6;
+      font-size: 15.5px;
+    }
+
+    .section {
+      max-width: 980px;
+      margin: 100px auto 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section h2 {
+      font-size: clamp(36px, 6vw, 64px);
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .section p {
+      color: #e8d5f0;
+      font-size: 18px;
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .coming-soon {
+      margin-top: 34px;
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(247, 223, 166, 0.13);
+      color: #ffe8a8;
+      font-weight: 800;
+      border: 1px solid rgba(247, 223, 166, 0.25);
+    }
+
+    footer {
+      text-align: center;
+      color: #bda2cc;
+      margin-top: 90px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (max-width: 760px) {
+      .nav a {
+        display: none;
+      }
+
+      .hero {
+        margin-top: 64px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="stars">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav class="nav">
+      <div class="logo">LumaRise</div>
+      <div>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#download">Download</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="moon-wrap">
+        <div class="moon">☾</div>
+      </div>
+
+      <div class="eyebrow">AI Manifestation Journal</div>
+
+      <h1>LumaRise</h1>
+
+      <p class="tagline">Manifest the life you’re meant to live.</p>
+
+      <p class="description">
+        A soft, intentional space for daily affirmations, manifestation journaling,
+        reflection, and becoming — guided by Luma, your AI companion for clarity,
+        confidence, and personal growth.
+      </p>
+
+      <div class="buttons" id="download">
+        <a class="btn btn-primary" href="#">Coming Soon to the App Store</a>
+        <a class="btn btn-secondary" href="#features">Explore Features</a>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="card">
+        <div class="icon">🌙</div>
+        <h3>Daily Intentions</h3>
+        <p>
+          Begin each day with a personalized intention that helps you feel grounded,
+          focused, and aligned with your goals.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✨</div>
+        <h3>AI Affirmations</h3>
+        <p>
+          Turn your fears, dreams, and thoughts into affirmations that feel human,
+          supportive, and emotionally real.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📖</div>
+        <h3>Private Journal</h3>
+        <p>
+          Save reflections, gratitude, manifestations, and breakthroughs in a private
+          journaling space that grows with you.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <h2>Reflection. Clarity. Becoming.</h2>
+      <p>
+        LumaRise was created for women who are dreaming bigger, healing gently,
+        and choosing to meet their future with intention. It is not about magic
+        promises — it is about mindset, reflection, and one aligned step at a time.
+      </p>
+
+      <div class="coming-soon">Version 1.0 coming soon</div>
+    </section>
+
+    <footer>
+      © 2026 LumaRise. All Rights Reserved.
+    </footer>
+  </main>
+</body>
+</html>
