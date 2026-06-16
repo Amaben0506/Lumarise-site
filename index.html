@@ -3,20 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>LumaRise | AI Manifestation Journal</title>
+  <meta
+    name="description"
+    content="LumaRise is an AI-powered manifestation and journaling app for daily intentions, grounded affirmations, moon rituals, and reflection."
+  />
 
   <style>
     :root {
-      --bg: #fff8f4;
-      --cream: #fffdf9;
-      --peach: #f7cdbf;
-      --rose: #d98f91;
-      --mauve: #9d6b7d;
-      --lavender: #c9b7df;
-      --deep: #3c2533;
-      --soft: #7b5a68;
-      --gold: #d9a85f;
-      --shadow: rgba(60, 37, 51, 0.12);
+      --midnight: #080413;
+      --deep-purple: #130622;
+      --purple: #25103d;
+      --amethyst: #4b246f;
+      --soft-amethyst: #7d4fb2;
+      --blush: #d8a6c8;
+      --muted-blush: #a989ad;
+      --gold: #f5c867;
+      --soft-gold: #ffe7a3;
+      --cream: #fff4d6;
+      --white: #fffaf3;
+      --card: rgba(32, 13, 54, 0.78);
+      --card-soft: rgba(54, 24, 82, 0.62);
+      --border: rgba(245, 200, 103, 0.22);
+      --shadow: rgba(0, 0, 0, 0.45);
     }
 
     * {
@@ -30,13 +40,40 @@
     }
 
     body {
+      min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
+      color: var(--white);
       background:
-        radial-gradient(circle at top left, #fde6dc 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #efe4ff 0%, transparent 35%),
-        var(--bg);
-      color: var(--deep);
+        radial-gradient(circle at top center, rgba(126, 53, 189, 0.34) 0%, transparent 34%),
+        radial-gradient(circle at bottom center, rgba(155, 35, 136, 0.28) 0%, transparent 38%),
+        linear-gradient(180deg, #05020d 0%, #10051d 42%, #19072a 100%);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255, 232, 173, 0.85) 1px, transparent 1.4px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.45) 1px, transparent 1.3px);
+      background-size: 120px 120px, 180px 180px;
+      background-position: 20px 40px, 90px 70px;
+      opacity: 0.28;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(245, 200, 103, 0.16), transparent 16%),
+        radial-gradient(circle at 50% 92%, rgba(201, 56, 173, 0.32), transparent 30%);
+      z-index: -1;
     }
 
     nav {
@@ -47,94 +84,163 @@
       align-items: center;
       position: sticky;
       top: 0;
-      background: rgba(255, 248, 244, 0.88);
-      backdrop-filter: blur(14px);
-      z-index: 10;
-      border-bottom: 1px solid rgba(217, 168, 95, 0.18);
+      z-index: 20;
+      background: rgba(7, 3, 17, 0.76);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(245, 200, 103, 0.16);
     }
 
     .brand {
-      font-size: 1.4rem;
-      letter-spacing: 0.04em;
-      font-weight: bold;
-      color: var(--deep);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--cream);
+      font-size: 1.45rem;
+      letter-spacing: 0.03em;
+      font-weight: 500;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, rgba(245, 200, 103, 0.24), rgba(124, 70, 171, 0.18));
+      border: 1px solid rgba(245, 200, 103, 0.36);
+      color: var(--gold);
+      box-shadow: 0 0 26px rgba(245, 200, 103, 0.18);
     }
 
     .nav-links {
       display: flex;
       gap: 24px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: var(--soft);
-      font-size: 0.95rem;
-      transition: color 0.2s ease;
+      color: var(--muted-blush);
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      transition: all 0.2s ease;
     }
 
     .nav-links a:hover {
-      color: var(--rose);
+      color: var(--soft-gold);
     }
 
     .hero {
-      min-height: 88vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 8%;
+      min-height: 90vh;
+      display: grid;
+      place-items: center;
+      padding: 80px 8% 72px;
       text-align: center;
+      position: relative;
     }
 
     .hero-card {
-      max-width: 880px;
-      padding: 64px 36px;
-      background: rgba(255, 253, 249, 0.72);
-      border: 1px solid rgba(217, 168, 95, 0.22);
+      width: min(960px, 100%);
+      padding: 68px 34px 54px;
       border-radius: 34px;
-      box-shadow: 0 24px 70px var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(25, 8, 47, 0.84), rgba(18, 6, 34, 0.88)),
+        radial-gradient(circle at top, rgba(245, 200, 103, 0.14), transparent 36%);
+      border: 1px solid var(--border);
+      box-shadow:
+        0 34px 100px rgba(0, 0, 0, 0.45),
+        inset 0 0 80px rgba(126, 53, 189, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -20%;
+      width: 2px;
+      height: 72%;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(245, 200, 103, 0.58), transparent);
+      opacity: 0.42;
+    }
+
+    .moon-wrap {
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(245, 200, 103, 0.22), transparent 58%),
+        radial-gradient(circle, rgba(131, 65, 196, 0.18), transparent 72%);
+      border: 1px solid rgba(245, 200, 103, 0.12);
+      box-shadow:
+        0 0 45px rgba(245, 200, 103, 0.24),
+        0 0 90px rgba(112, 48, 175, 0.2);
     }
 
     .moon {
-      width: 78px;
-      height: 78px;
-      border-radius: 50%;
-      margin: 0 auto 24px;
-      background: linear-gradient(145deg, var(--lavender), var(--peach));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 2.2rem;
-      box-shadow: 0 12px 30px rgba(157, 107, 125, 0.22);
+      font-size: 4.4rem;
+      color: var(--gold);
+      text-shadow:
+        0 0 16px rgba(245, 200, 103, 0.62),
+        0 0 40px rgba(245, 200, 103, 0.28);
+      transform: rotate(-8deg);
     }
 
     .eyebrow {
+      color: var(--muted-blush);
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.78rem;
-      color: var(--mauve);
-      margin-bottom: 14px;
+      letter-spacing: 0.34em;
+      font-size: 0.76rem;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      line-height: 0.95;
-      color: var(--deep);
-      margin-bottom: 20px;
+      color: var(--cream);
+      font-size: clamp(4rem, 10vw, 7.4rem);
+      line-height: 0.9;
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      text-shadow: 0 0 34px rgba(245, 200, 103, 0.16);
+      margin-bottom: 18px;
     }
 
     .tagline {
-      font-size: clamp(1.3rem, 3vw, 2rem);
-      color: var(--rose);
-      margin-bottom: 22px;
-      font-style: italic;
+      color: var(--blush);
+      font-size: clamp(1.15rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.06em;
+      margin-bottom: 28px;
+    }
+
+    .divider {
+      width: min(250px, 70%);
+      height: 1px;
+      margin: 0 auto 28px;
+      background: linear-gradient(90deg, transparent, rgba(245, 200, 103, 0.65), transparent);
+      position: relative;
+    }
+
+    .divider::after {
+      content: "✦";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--gold);
+      background: var(--deep-purple);
+      padding: 0 10px;
+      font-size: 0.85rem;
     }
 
     .hero p {
-      max-width: 690px;
-      margin: 0 auto 32px;
-      color: var(--soft);
+      max-width: 720px;
+      margin: 0 auto 34px;
+      color: var(--muted-blush);
       font-size: 1.08rem;
     }
 
@@ -146,202 +252,376 @@
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
       padding: 14px 24px;
       border-radius: 999px;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 0.95rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-size: 0.94rem;
+      transition: all 0.22s ease;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--rose), var(--mauve));
-      color: white;
-      box-shadow: 0 12px 24px rgba(157, 107, 125, 0.24);
+      color: #2b1837;
+      background: linear-gradient(135deg, #ffe9a8, #f5c867 48%, #d99a3d);
+      box-shadow: 0 14px 32px rgba(245, 200, 103, 0.25);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--mauve);
-      border: 1px solid rgba(157, 107, 125, 0.24);
+      color: var(--cream);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(245, 200, 103, 0.24);
     }
 
     .btn:hover {
       transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
     }
 
     section {
-      padding: 80px 8%;
+      padding: 82px 8%;
     }
 
     .section-title {
+      max-width: 780px;
+      margin: 0 auto 42px;
       text-align: center;
-      max-width: 720px;
-      margin: 0 auto 48px;
+    }
+
+    .section-title .mini {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.72rem;
+      margin-bottom: 10px;
     }
 
     .section-title h2 {
-      font-size: clamp(2.1rem, 5vw, 3.5rem);
-      margin-bottom: 14px;
-      color: var(--deep);
+      color: var(--cream);
+      font-size: clamp(2.3rem, 5vw, 4rem);
+      line-height: 1.05;
+      font-weight: 400;
+      margin-bottom: 16px;
     }
 
     .section-title p {
-      color: var(--soft);
-      font-size: 1.03rem;
+      color: var(--muted-blush);
+      font-size: 1.04rem;
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 1100px;
+      gap: 22px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
     .feature-card,
     .support-card,
-    .faq-item {
-      background: rgba(255, 253, 249, 0.78);
-      border: 1px solid rgba(217, 168, 95, 0.2);
+    .faq-item,
+    .tech-card {
+      background:
+        linear-gradient(180deg, rgba(41, 17, 69, 0.78), rgba(17, 6, 32, 0.82));
+      border: 1px solid rgba(245, 200, 103, 0.18);
       border-radius: 28px;
       padding: 30px;
-      box-shadow: 0 18px 44px rgba(60, 37, 51, 0.08);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.26);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before,
+    .support-card::before,
+    .faq-item::before,
+    .tech-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(245, 200, 103, 0.08), transparent 36%);
+      pointer-events: none;
     }
 
     .feature-icon {
-      font-size: 2rem;
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
       margin-bottom: 18px;
+      border-radius: 18px;
+      background: rgba(245, 200, 103, 0.11);
+      border: 1px solid rgba(245, 200, 103, 0.18);
+      color: var(--gold);
+      font-size: 1.45rem;
     }
 
     .feature-card h3,
     .support-card h3,
-    .faq-item h3 {
-      font-size: 1.35rem;
+    .faq-item h3,
+    .tech-card h3 {
+      color: var(--cream);
+      font-size: 1.32rem;
       margin-bottom: 10px;
-      color: var(--deep);
+      font-weight: 500;
     }
 
     .feature-card p,
     .support-card p,
-    .faq-item p {
-      color: var(--soft);
+    .faq-item p,
+    .tech-card p {
+      color: var(--muted-blush);
       font-size: 0.98rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .about {
-      max-width: 900px;
+    .app-preview {
+      max-width: 1050px;
       margin: 0 auto;
-      text-align: center;
-      background: rgba(255, 253, 249, 0.68);
-      border-radius: 34px;
-      padding: 52px 36px;
-      border: 1px solid rgba(217, 168, 95, 0.18);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 34px;
+      align-items: center;
     }
 
-    .about h2 {
-      font-size: clamp(2.1rem, 5vw, 3.4rem);
+    .phone-card {
+      border-radius: 34px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(245, 200, 103, 0.18);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+    }
+
+    .phone-screen {
+      min-height: 560px;
+      border-radius: 28px;
+      padding: 42px 24px 28px;
+      background:
+        radial-gradient(circle at top center, rgba(245, 200, 103, 0.18), transparent 22%),
+        radial-gradient(circle at bottom center, rgba(184, 38, 157, 0.4), transparent 36%),
+        linear-gradient(180deg, #090415 0%, #1b0730 54%, #10051d 100%);
+      border: 1px solid rgba(245, 200, 103, 0.16);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 232, 173, 0.78) 1px, transparent 1.3px);
+      background-size: 72px 72px;
+      opacity: 0.22;
+    }
+
+    .phone-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .phone-moon {
+      color: var(--gold);
+      font-size: 4rem;
+      margin-bottom: 14px;
+      text-shadow: 0 0 28px rgba(245, 200, 103, 0.55);
+    }
+
+    .phone-title {
+      color: var(--cream);
+      font-size: 3.2rem;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .phone-subtitle {
+      color: var(--blush);
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 0.86rem;
+      margin-bottom: 26px;
+    }
+
+    .intention-box {
+      padding: 26px 18px;
+      border-radius: 24px;
+      background: rgba(38, 17, 62, 0.8);
+      border: 1px solid rgba(245, 200, 103, 0.17);
+    }
+
+    .intention-box h3 {
+      font-family: Arial, sans-serif;
+      color: var(--white);
+      font-size: 1.35rem;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      font-family: Arial, sans-serif;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 13px 16px;
+      margin: 10px 0;
+    }
+
+    .preview-copy h2 {
+      color: var(--cream);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.04;
+      font-weight: 400;
       margin-bottom: 18px;
     }
 
-    .about p {
-      color: var(--soft);
-      font-size: 1.06rem;
+    .preview-copy p {
+      color: var(--muted-blush);
+      margin-bottom: 18px;
     }
 
+    .bullet-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+      font-family: Arial, sans-serif;
+    }
+
+    .bullet {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(245, 200, 103, 0.14);
+      color: var(--cream);
+    }
+
+    .bullet span {
+      color: var(--gold);
+      margin-right: 8px;
+    }
+
+    .tech-grid,
     .support-grid {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto 34px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
     }
 
-    .support-card a {
-      color: var(--mauve);
-      font-weight: bold;
+    .tech-card strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .support-card a,
+    .faq-item a,
+    footer a {
+      color: var(--soft-gold);
+      font-weight: 700;
       text-decoration: none;
     }
 
-    .support-card a:hover {
+    .support-card a:hover,
+    .faq-item a:hover,
+    footer a:hover {
       text-decoration: underline;
     }
 
     .faq-list {
-      max-width: 920px;
+      max-width: 930px;
       margin: 0 auto;
       display: grid;
       gap: 18px;
     }
 
-    .faq-item {
-      padding: 26px 28px;
-    }
-
-    .download {
-      text-align: center;
-    }
-
     .download-box {
-      max-width: 720px;
+      max-width: 780px;
       margin: 0 auto;
-      padding: 46px 32px;
-      border-radius: 32px;
-      background: linear-gradient(135deg, rgba(247, 205, 191, 0.56), rgba(201, 183, 223, 0.56));
-      border: 1px solid rgba(217, 168, 95, 0.22);
+      padding: 50px 32px;
+      border-radius: 34px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(245, 200, 103, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(42, 16, 72, 0.82), rgba(12, 4, 26, 0.9));
+      border: 1px solid rgba(245, 200, 103, 0.2);
+      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.34);
     }
 
     .download-box h2 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--cream);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      font-weight: 400;
       margin-bottom: 14px;
     }
 
     .download-box p {
-      color: var(--soft);
+      max-width: 620px;
+      margin: 0 auto 26px;
+      color: var(--muted-blush);
+    }
+
+    .price {
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+      font-weight: 700;
       margin-bottom: 26px;
     }
 
     footer {
       text-align: center;
-      padding: 34px 8%;
-      color: var(--soft);
+      padding: 38px 8%;
+      color: var(--muted-blush);
       font-size: 0.9rem;
+      border-top: 1px solid rgba(245, 200, 103, 0.12);
+      background: rgba(5, 2, 13, 0.52);
     }
 
-    footer a {
-      color: var(--mauve);
-      text-decoration: none;
-      margin: 0 8px;
+    footer .footer-links {
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       nav {
         flex-direction: column;
         gap: 14px;
       }
 
       .nav-links {
-        flex-wrap: wrap;
         justify-content: center;
         gap: 14px;
       }
 
       .features,
-      .support-grid {
+      .tech-grid,
+      .support-grid,
+      .app-preview {
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        padding-top: 54px;
+      }
+
       .hero-card {
-        padding: 46px 24px;
+        padding: 50px 22px 42px;
       }
 
       section {
         padding: 64px 6%;
+      }
+
+      .phone-screen {
+        min-height: 520px;
       }
     }
   </style>
@@ -349,163 +629,300 @@
 
 <body>
   <nav>
-    <div class="brand">LumaRise</div>
+    <div class="brand">
+      <span class="brand-mark">☾</span>
+      <span>LumaRise</span>
+    </div>
 
     <div class="nav-links">
       <a href="#features">Features</a>
-      <a href="#about">About</a>
+      <a href="#preview">Preview</a>
+      <a href="#pro">Pro</a>
       <a href="#support">Support</a>
-      <a href="#download">Download</a>
+      <a href="#download">Status</a>
     </div>
   </nav>
 
   <header class="hero">
     <div class="hero-card">
-      <div class="moon">☾</div>
+      <div class="moon-wrap">
+        <div class="moon">☾</div>
+      </div>
+
       <div class="eyebrow">AI Manifestation Journal</div>
       <h1>LumaRise</h1>
       <div class="tagline">Manifest the life you’re meant to live.</div>
+      <div class="divider"></div>
 
       <p>
-        A soft, intentional space for daily affirmations, manifestation journaling,
-        reflection, and becoming — guided by Luma, your AI companion for clarity,
-        confidence, and personal growth.
+        LumaRise is your AI-powered manifestation and journaling app for daily intentions,
+        grounded affirmations, moon rituals, reflection, and becoming the version of yourself
+        you keep dreaming about.
       </p>
 
       <div class="button-row">
-        <a href="#download" class="btn btn-primary">Coming Soon to the App Store</a>
-        <a href="#features" class="btn btn-secondary">Explore Features</a>
+        <a href="#download" class="btn btn-primary">App Store Review Status</a>
+        <a href="#support" class="btn btn-secondary">Contact Support</a>
       </div>
     </div>
   </header>
 
   <section id="features">
     <div class="section-title">
-      <h2>A softer way to grow</h2>
+      <div class="mini">Reflection ✦ Clarity ✦ Becoming</div>
+      <h2>A softer space for your next chapter</h2>
       <p>
-        LumaRise helps you slow down, reflect, and reconnect with the future you are creating.
+        Built for the quiet moments when you need a little guidance, a little grounding,
+        and a reminder that your future is still unfolding.
       </p>
     </div>
 
     <div class="features">
       <div class="feature-card">
-        <div class="feature-icon">🌞</div>
-        <h3>Daily Intentions</h3>
-        <p>
-          Begin each day with a personalized intention that helps you feel grounded,
-          focused, and aligned with your goals.
-        </p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">✨</div>
+        <div class="feature-icon">✦</div>
         <h3>AI Affirmations</h3>
         <p>
-          Turn your fears, dreams, and thoughts into affirmations that feel human,
-          supportive, and emotionally real.
+          Type a goal, fear, or thought, and Luma rewrites it into a grounded affirmation
+          that feels supportive, calm, and emotionally real.
         </p>
       </div>
 
       <div class="feature-card">
-        <div class="feature-icon">📖</div>
-        <h3>Private Journal</h3>
+        <div class="feature-icon">☾</div>
+        <h3>Moon Phase Rituals</h3>
         <p>
-          Save reflections, gratitude, manifestations, and breakthroughs in a private
-          journaling space that grows with you.
+          Receive daily moon phase rituals powered by Claude AI, designed to help you
+          pause, reflect, release, and realign.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">𖤓</div>
+        <h3>Daily Intentions</h3>
+        <p>
+          Begin your day by setting an intention that keeps you focused on who you are
+          becoming, not just what you are trying to finish.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">✍</div>
+        <h3>Manifestation Journal</h3>
+        <p>
+          Save reflections, gratitude, manifestations, fears, breakthroughs, and quiet
+          little promises to yourself in one private space.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3>Streak Tracking</h3>
+        <p>
+          Build a gentle daily practice with streaks that encourage consistency without
+          turning your growth into pressure.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛡</div>
+        <h3>Freeze Shields</h3>
+        <p>
+          LumaRise Pro includes freeze shields so you can protect your streak when life
+          gets busy, messy, or beautifully human.
         </p>
       </div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="about">
-      <h2>Reflection. Clarity. Becoming.</h2>
-      <p>
-        LumaRise was created for women who are dreaming bigger, healing gently, and
-        choosing to meet their future with intention. It is not about magic promises —
-        it is about mindset, reflection, and one aligned step at a time.
-      </p>
+  <section id="preview">
+    <div class="app-preview">
+      <div class="phone-card">
+        <div class="phone-screen">
+          <div class="phone-content">
+            <div class="phone-moon">☾</div>
+            <div class="phone-subtitle">AI MANIFESTATION JOURNAL</div>
+            <div class="phone-title">LumaRise</div>
+            <div class="phone-subtitle">Manifest the life you’re meant to live.</div>
+
+            <div class="intention-box">
+              <div class="phone-subtitle">✦ BEGIN TODAY ✦</div>
+              <h3>Set an intention that feels aligned.</h3>
+
+              <div class="pill">☾ Daily intentions</div>
+              <div class="pill">✦ AI affirmations</div>
+              <div class="pill">✧ Private journal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-copy">
+        <h2>Made for midnight thoughts and morning intentions.</h2>
+        <p>
+          LumaRise blends manifestation journaling, AI reflection, moon phase energy,
+          and soft accountability into a calm iOS experience.
+        </p>
+
+        <p>
+          It is not about perfection. It is about showing up, naming what you want,
+          releasing what feels heavy, and letting Luma help you turn your thoughts
+          into something steadier.
+        </p>
+
+        <div class="bullet-list">
+          <div class="bullet"><span>✦</span> AI-powered affirmations through Claude</div>
+          <div class="bullet"><span>☾</span> Daily moon phase rituals</div>
+          <div class="bullet"><span>✧</span> Private manifestation journal</div>
+          <div class="bullet"><span>𖤓</span> Streaks and premium freeze shields</div>
+        </div>
+      </div>
     </div>
   </section>
 
- <section id="support">
-  <div class="section-title">
-    <h2>Support</h2>
-    <p>
-      Need help with LumaRise? We’re here to make your experience feel simple,
-      peaceful, and supported.
-    </p>
-  </div>
-
-  <div class="support-grid">
-    <div class="support-card">
-      <h3>Contact Support</h3>
+  <section id="pro">
+    <div class="section-title">
+      <div class="mini">LumaRise Pro</div>
+      <h2>Go deeper with your daily practice</h2>
       <p>
-        For app questions, account help, feedback, bug reports, or feature requests,
-        email us at
-        <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request">
-          support@bitzahugs.com
-        </a>.
+        LumaRise Pro unlocks the full manifestation experience with AI-powered support,
+        deeper rituals, and premium streak protection.
       </p>
     </div>
 
-    <div class="support-card">
-      <h3>Request Help</h3>
-      <p>
-        Have a question, issue, or suggestion? Send us a message with a short description
-        of what you need help with, and we’ll review your request.
-      </p>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <h3>Monthly</h3>
+        <p><strong>$6.99/month</strong></p>
+        <p>For users who want full access while keeping things flexible.</p>
+      </div>
 
-      <a
-  href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request"
-  class="btn btn-primary"
->
-  Contact Support
-</a>
+      <div class="tech-card">
+        <h3>Yearly</h3>
+        <p><strong>$49.99/year</strong></p>
+        <p>Best value for building a long-term manifestation and journaling practice.</p>
+      </div>
+
+      <div class="tech-card">
+        <h3>Entitlement</h3>
+        <p><strong>LumaRise Pro</strong></p>
+        <p>Subscriptions are powered through RevenueCat and the App Store.</p>
+      </div>
     </div>
+  </section>
 
-    <div class="support-card">
-      <h3>Feedback</h3>
+  <section id="support">
+    <div class="section-title">
+      <div class="mini">Need Help?</div>
+      <h2>Contact Support</h2>
       <p>
-        LumaRise is growing with care. Share feature ideas, improvements, or anything
-        that would make the app feel more supportive for you.
-      </p>
-    </div>
-  </div>
-
-  <div class="faq-list">
-    <div class="faq-item">
-      <h3>How do I contact support?</h3>
-      <p>
-        Tap the Email Support button or send a message directly to
-        <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request">
-          support@bitzahugs.com
-        </a>.
+        Have a question, issue, bug report, account concern, or feature request?
+        Send a support email and we’ll review your request.
       </p>
     </div>
 
-    <div class="faq-item">
-      <h3>What should I include in my support request?</h3>
-      <p>
-        Please include what happened, what device you are using, and screenshots if they
-        help explain the issue.
-      </p>
+    <div class="support-grid">
+      <div class="support-card">
+        <h3>Email Support</h3>
+        <p>
+          For LumaRise support, email
+          <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request">
+            support@bitzahugs.com
+          </a>.
+        </p>
+      </div>
+
+      <div class="support-card">
+        <h3>Send a Request</h3>
+        <p>
+          Include what happened, what device you are using, and screenshots if they help
+          explain the issue.
+        </p>
+
+        <br />
+
+        <a
+          href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request&body=Hi%20LumaRise%20Support%2C%0A%0AI%20need%20help%20with%3A%0A%0ADevice%3A%0AApp%20version%20if%20known%3A%0A%0ADetails%3A%0A"
+          class="btn btn-primary"
+        >
+          Email Support
+        </a>
+      </div>
+
+      <div class="support-card">
+        <h3>Feature Requests</h3>
+        <p>
+          Want to suggest a ritual, journaling tool, affirmation feature, or improvement?
+          Send your idea through support and include “Feature Request” in the message.
+        </p>
+      </div>
     </div>
 
-    <div class="faq-item">
-      <h3>Is LumaRise therapy or medical advice?</h3>
-      <p>
-        No. LumaRise is a reflection, journaling, affirmation, and mindset support app.
-        It is not a replacement for therapy, medical care, crisis support, or professional advice.
-      </p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3>Is LumaRise therapy or medical advice?</h3>
+        <p>
+          No. LumaRise is a manifestation, journaling, affirmation, and reflection app.
+          It is not therapy, medical care, crisis support, or professional mental health advice.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I report a subscription issue?</h3>
+        <p>
+          Email support with the device you used, whether you selected monthly or yearly,
+          and a short description of what you are seeing on the paywall or subscription screen.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I request help with my account?</h3>
+        <p>
+          Yes. Send an email to
+          <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Account%20Support">
+            support@bitzahugs.com
+          </a>
+          with “Account Support” in the subject line.
+        </p>
+      </div>
     </div>
-<footer>
-  <p>
-    © 2026 LumaRise. All Rights Reserved.
-    <br />
-    <a href="#support">Support</a>
-    <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request">Contact</a>
-  </p>
-</footer>
-    
-  </div>
+  </section>
+
+  <section id="download">
+    <div class="download-box">
+      <div class="mini">Current Status</div>
+      <h2>Production build is in progress</h2>
+      <p>
+        LumaRise recently fixed the iPad paywall layout cutoff and connected RevenueCat
+        offerings to the real App Store products. Once this build is submitted, it will
+        go back to Apple for review.
+      </p>
+
+      <div class="price">
+        LumaRise Pro · $6.99/month or $49.99/year
+      </div>
+
+      <div class="button-row">
+        <a
+          href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request"
+          class="btn btn-primary"
+        >
+          Contact Support
+        </a>
+
+        <a href="#features" class="btn btn-secondary">
+          Explore Features
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 LumaRise by Aradia Studios. All Rights Reserved.</p>
+
+    <div class="footer-links">
+      <a href="#support">Support</a>
+      <a href="mailto:support@bitzahugs.com?subject=LumaRise%20Support%20Request">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>
